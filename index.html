@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AUNG_CSResearch.edu</title>
+    <title>AUNG_CSResearch.com</title>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -151,7 +151,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(77, 240, 255, 0.06) 0%, transparent 50%),
                 linear-gradient(90deg, transparent 0%, rgba(0, 217, 255, 0.03) 50%, transparent 100%);
@@ -403,7 +403,7 @@
             z-index: 1;
         }
 
-        /* Navigation */
+        /* Navigation - IMPROVED FOR MOBILE */
         nav {
             position: fixed;
             top: 0;
@@ -411,7 +411,7 @@
             right: 0;
             background: rgba(10, 22, 40, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(0, 217, 255, 0.3);
             animation: slideDown 0.6s ease-out;
@@ -432,8 +432,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            list-style:none;
-            padding:0;
+            padding: 0 1rem;
         }
 
         .logo {
@@ -443,24 +442,40 @@
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Mobile menu toggle button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 1.5rem;
             list-style: none;
+            align-items: center;
+            flex-wrap: nowrap;
         }
 
         .nav-links a {
             color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
             transition: all 0.3s ease;
             position: relative;
+            white-space: nowrap;
         }
 
         .nav-links a::after {
@@ -484,7 +499,7 @@
         }
 
         .nav-icon {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         /* Hero Section */
@@ -516,10 +531,10 @@
             align-items: center;
         }
 
-        .hero-text h3 {
+        .hero-text h3{
             white-space: nowrap;
             font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
+            font-size: 3rem;
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1rem;
@@ -927,6 +942,7 @@
         .paper-links {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .paper-link {
@@ -1117,6 +1133,7 @@
             justify-content: center;
             gap: 2rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .social-links a {
@@ -1132,21 +1149,54 @@
 
         footer p {
             color: var(--text-dim);
+            padding: 0 1rem;
         }
 
         /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.85rem;
+                gap: 0.2rem;
+            }
+            
+            .nav-icon {
+                font-size: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            /* Hide text labels on small screens, show only icons */
+            .nav-links a span:not(.nav-icon) {
+                display: none;
+            }
+            
+            .nav-links {
+                gap: 0.8rem;
+            }
+            
+            .nav-links a {
+                padding: 0.5rem;
+            }
+            
+            .nav-icon {
+                font-size: 1.3rem;
+            }
+
             .hero-content {
                 grid-template-columns: 1fr;
             }
 
-            .hero-text h1 {
-                font-size: 3rem;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                gap: 1rem;
+            .hero-text h3 {
+                font-size: 2.5rem;
+                white-space: normal;
             }
 
             .section-title {
@@ -1155,6 +1205,50 @@
 
             .research-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .profile-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Even smaller screens - use hamburger menu */
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: rgba(10, 22, 40, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 2rem;
+                border-left: 1px solid rgba(0, 217, 255, 0.3);
+                border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+                transition: right 0.3s ease;
+                width: 200px;
+                align-items: flex-start;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links a span:not(.nav-icon) {
+                display: inline;
+            }
+            
+            .nav-links a {
+                width: 100%;
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+            
+            nav .container {
+                padding: 0 1rem;
             }
         }
 
@@ -1218,12 +1312,13 @@
     <nav>
         <div class="container">
             <div class="logo">👨‍🎓</div>
-            <ul class="nav-links">
-                <li><a href="#home"><span class="nav-icon">🏠</span> Home</a></li>
-                <li><a href="#education"><span class="nav-icon">🎓</span> Education</a></li>
-                <li><a href="#research"><span class="nav-icon">🔬</span> Research Field</a></li>
-                <li><a href="#papers"><span class="nav-icon">📄</span> Research Paper</a></li>
-                <li><a href="#contact"><span class="nav-icon">📧</span> Contact Info</a></li>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home"><span class="nav-icon">🏠</span> <span>Home</span></a></li>
+                <li><a href="#education"><span class="nav-icon">🎓</span> <span>Education</span></a></li>
+                <li><a href="#research"><span class="nav-icon">🔬</span> <span>Research</span></a></li>
+                <li><a href="#papers"><span class="nav-icon">📄</span> <span>Papers</span></a></li>
+                <li><a href="#contact"><span class="nav-icon">📧</span> <span>Contact</span></a></li>
             </ul>
         </div>
     </nav>
@@ -1352,8 +1447,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="paper-item">
                     <div class="paper-title">The Impact of Artificial Intelligence on Education in Myanmar (Burma)</div>
                     <div class="paper-authors">Aung Ko Ko Oo, Nyi Nyi Min Khant</div>
@@ -1362,12 +1455,9 @@
                         Artificial Intelligence has revolutionized the world of education by improving the efficiency of teaching, personalization, and accessibility. In the case of countries like Myanmar, whose educational systems are still developing, AI can play a significant role in reducing barriers to education and improving educational achievements. In this paper, the effects of Artificial Intelligence on the educational system in Myanmar will be investigated. The role of AI in educational systems and how AI affects students and teachers will also be examined. This paper uses the method of desk-based studies and case studies that involve AI-based educational systems in the South Asian region. The results of this particular study suggest that if the government and the private sectors can manage the situation aptly, AI can play a significant role in personalization techniques and the development of digital literacy.
                     </div>
                     <div class="paper-links">
-                        <a href="https://www.researchgate.net/publication/397100393_The_Impact_of_Artificial_Intelligence_on_Education_in_Myanmar_Burma?_sg%5B0%5D=KMv2mjeOVY0BoDlTRpXqdZpGV5lXbLTiCEJ0VlQAtoUQeMVwr3-oX6z2LsVjfuaP17BwDWuMXCZxYNwtjuywsb9gAk0k5D1ancVEI0Qo.SZ_fM5-sHVlih3IK4FMt3Y27WZrOZlrm61itiiMmDYV3Pl3ar4bnMCYMm5jxIkXY2MGvnMDkOJ28YM-qb8ys7A&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoicHJvZmlsZSIsInBvc2l0aW9uIjoicGFnZUNvbnRlbnQifX0" class="paper-link">PDF</a>
-                        <!-- <a href="#" class="paper-link">Code</a>
-                        <a href="#" class="paper-link">Cite</a> -->
+                        <a href="https://www.researchgate.net/publication/397100393_The_Impact_of_Artificial_Intelligence_on_Education_in_Myanmar_Burma" class="paper-link">PDF</a>
                     </div>
                 </div>
-
 
                 <div class="paper-item">
                     <div class="paper-title">Robust Object Detection in Challenging Visual Environments</div>
@@ -1397,7 +1487,7 @@
                     <div class="contact-card">
                         <div class="contact-icon">📧</div>
                         <h3>Email</h3>
-                        <p class="contact-detail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c9ddc6cfc3c7c3c786dacddbcdc9dacbc0e8cdc5c9c1c486cbc7c5">[email&#160;protected]</a></p>
+                        <p class="contact-detail">AungKoKoOo@myuopeople.edu</p>
                         <p class="contact-description">For research inquiries and collaborations</p>
                     </div>
 
@@ -1467,17 +1557,30 @@
     <footer>
         <div class="container">
             <div class="social-links">
-                <a href="AungKoKoOo@myuopeople.edu" title="Email">📧</a>
+                <a href="mailto:AungKoKoOo@myuopeople.edu" title="Email">📧</a>
                 <a href="https://www.linkedin.com/in/aung-ko-ko-oo-ab3a9839a/" title="LinkedIn">💼</a>
                 <a href="https://github.com/sage2029" title="GitHub">💻</a>
                 <a href="https://www.researchgate.net/profile/Aung-Ko-Ko-Oo-4?ev=hdr_xprf" title="ResearchGate">🎓</a>
-                <a href="https://x.com/sage60458?s=21" title="x">🐦</a>
+                <a href="https://x.com/sage60458?s=21" title="X (Twitter)">🐦</a>
             </div>
             <p>&copy; 2024 Aung Ko Ko Oo. All rights reserved. | Pushing the boundaries of AI research.</p>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
         // Smooth scroll animation trigger
         const observerOptions = {
             threshold: 0.1,
